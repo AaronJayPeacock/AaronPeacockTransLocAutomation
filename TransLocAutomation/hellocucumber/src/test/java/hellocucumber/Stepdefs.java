@@ -13,15 +13,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 import static org.junit.Assert.assertEquals;
 
-/*
-class IsItFriday {
-    static String isItFriday(String today) {
-        return "Friday".equals(today) ? "TGIF" : "Nope";
-    }
-}
-
- */
-
 public class Stepdefs {
     private String today = "Friday";
     private String actualTitle = "";
@@ -29,8 +20,6 @@ public class Stepdefs {
 
     @Given("I am on the Architect Stage TransLoc login page")
     public void I_am_on_Login_page() {
-        System.out.println("Hey its working!");
-
 
         System.setProperty("webdriver.gecko.driver", "C:\\Users\\aaron\\OneDrive\\Documents\\Work\\geckodriver-v0.26.0-win64\\geckodriver.exe");
         myFireFoxDriver = new FirefoxDriver();
@@ -45,10 +34,17 @@ public class Stepdefs {
     }
 
     @When("I enter XMp$g7qc6Q6p5r!Rm5 into the password text box")
-    public void I_enter_password() {
+    public void I_enter_valid_password() {
         WebElement usernameTextBoxElement = myFireFoxDriver.findElement(By.id("password"));
         usernameTextBoxElement.click();
         usernameTextBoxElement.sendKeys("XMp$g7qc6Q6p5r!Rm5");
+    }
+
+    @When("I enter invalid_Password into the password text box")
+    public void I_enter_invalid_password(){
+        WebElement usernameTextBoxElement = myFireFoxDriver.findElement(By.id("password"));
+        usernameTextBoxElement.click();
+        usernameTextBoxElement.sendKeys("invalid_Password");
     }
 
     @When("I click on the Log in button")
@@ -59,13 +55,26 @@ public class Stepdefs {
 
     }
 
-
     @Then("I will successfully log in to the Architect Feeds page")
-    public void I_should_enter_Architect() {
+    public void I_will_login_successfully() {
 
         String actualTitle = myFireFoxDriver.getTitle();
         System.out.println("Title: " + actualTitle);
 
         Assert.assertEquals("Architect", actualTitle);
+        myFireFoxDriver.close();
+
+    }
+
+
+    @Then("I should be presented with an Invalid password login page")
+    public void I_should_be_presented_with_Invalid_password_login_page() {
+
+        String actualTitle = myFireFoxDriver.getTitle();
+        System.out.println("Title: " + actualTitle);
+
+        Assert.assertEquals("Log in", actualTitle);
+
+        myFireFoxDriver.close();
     }
 }
