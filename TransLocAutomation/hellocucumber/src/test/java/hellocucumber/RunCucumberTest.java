@@ -8,6 +8,9 @@ import org.junit.runner.RunWith;
 @CucumberOptions(plugin = "pretty", features = "src/test/resources/hellocucumber")
 public class RunCucumberTest {
 
+    public static void main(String[] args){
+        System.out.println("Hello");
+    }
 
 
 

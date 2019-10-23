@@ -1,7 +1,8 @@
-Feature: Is it Friday yet?
-  Everybody wants to know when it's Friday
+Feature: Does the login feature work
 
-  Scenario: Sunday isn't Friday
-    Given today is "<day>"
-    When I ask whether it's Friday yet
-    Then I should be told "Nope"
+  Scenario: I can successfully login to Architect
+    Given I am on the Architect Stage TransLoc login page
+    When I enter qa_user_02 into the username text box
+    And I enter XMp$g7qc6Q6p5r!Rm5 into the password text box
+    And I click on the Log in button
+    Then I will successfully log in to the Architect Feeds page
